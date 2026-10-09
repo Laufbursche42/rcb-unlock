@@ -123,8 +123,6 @@ window.I18N = {
     warn_move_alarm: 'Der Bewegungsalarm kann unerwartet auslösen. Fortfahren?',
     warnRaw: 'Du sendest ein rohes DP-Frame direkt an den Roller. Falsche dpId oder Werte können unerwartete Zustände auslösen.',
 
-    disclaimerText: 'Dieses Werkzeug ist eine Machbarkeitsstudie, kein fertiges Produkt. Es gibt keine Gewährleistung und keine Zusicherung fehlerfreien Betriebs. RCB nutzt das Tuya-Smart-Life-Protokoll, die numerischen dpIds, der localKey und das genaue Frame-Format sind Cloud- bzw. geräteseitig und nicht aus dem App-Paket belegt - du gibst sie selbst ein und testest am eigenen Gerät. Nutze es nur am eigenen Fahrzeug und auf eigenes Risiko. Die Seite spricht nur lokal über Bluetooth mit dem Gerät, es werden keine Daten an einen Server gesendet. RCB und Tuya sind Marken der jeweiligen Inhaber. Dieses Projekt ist unabhängig und steht in keiner Verbindung zu RCB oder Tuya.',
-
     errNoWebBt: 'Dieser Browser hat kein Web Bluetooth. Nutze Chrome, Edge oder Bluefy (iOS).',
     errNotConnected: 'nicht verbunden',
     errDpId: 'dpId muss zwischen 1 und 255 liegen',
@@ -274,8 +272,6 @@ window.I18N = {
     warn_auto_unlock: 'Auto-unlock is a security setting. Set wrong, the scooter unlocks unintentionally.',
     warn_move_alarm: 'The move alarm can trigger unexpectedly. Continue?',
     warnRaw: 'You are sending a raw DP frame straight to the scooter. A wrong dpId or value can trigger unexpected states.',
-
-    disclaimerText: 'This tool is a feasibility study, not a finished product. There is no warranty and no guarantee of error-free operation. RCB uses the Tuya Smart Life protocol; the numeric dpIds, the localKey and the exact frame format are cloud or device-side and are not carried in the app package - you supply them yourself and test on your own device. Use it only on your own vehicle and at your own risk. The page talks to the device locally over Bluetooth only, no data is sent to any server. RCB and Tuya are trademarks of their respective owners. This project is independent and not affiliated with RCB or Tuya.',
 
     errNoWebBt: 'This browser has no Web Bluetooth. Use Chrome, Edge or Bluefy (iOS).',
     errNotConnected: 'not connected',
