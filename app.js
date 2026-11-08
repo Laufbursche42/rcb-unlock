@@ -22,7 +22,7 @@
  */
 
 // Pre-commit cache-buster auto-bumps BUILD and every ?v= on any web-asset change.
-const BUILD = 'v9';
+const BUILD = 'v10';
 
 // --------------------------- helpers ---------------------------
 const $ = (id) => document.getElementById(id);
