@@ -8,13 +8,13 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
-<link rel="stylesheet" href="styles.css?v=10">
+<link rel="stylesheet" href="styles.css?v=11">
 <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "1f2a3915448b4b68b4380423f2be4b09"}'></script><!-- scan-ok: Cloudflare Web Analytics beacon (token starts 1f2a39 ends 4b09); cookieless aggregate page metrics, see PRIVACY -->
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>Laufbursche <span data-t="brandSub"></span></h1>
+    <h1>Laufbursche <span data-t="brandSub">RCB Tool</span></h1>
     <div class="head-right">
       <span class="status" id="status" data-state="disconnected">disconnected</span>
       <div class="head-tools">
@@ -27,146 +27,146 @@
     </div>
   </header>
 
-  <div class="sunset-banner" role="alert" data-t="tuyaNoticeHtml"></div>
+  <div class="sunset-banner" role="alert" data-t="tuyaNoticeHtml"><b>Tuya-Gerät.</b> Dieses Gerät läuft über das Tuya-Backend, das wir nicht unterstützen. Diese Seite bleibt eine Machbarkeitsstudie ohne nutzbares Tuning.</div>
 
   <div class="card">
-    <h2 data-t="s1Title"></h2>
-    <p class="hint" data-t="sub"></p>
-    <p class="hint" data-t="startHintGuide"></p>
-    <p class="warn" data-t="expWarn"></p>
-    <p class="hint" data-t="ownDevice"></p>
+    <h2 data-t="s1Title">So fängst du an</h2>
+    <p class="hint" data-t="sub">Live über Web Bluetooth mit deinem RCB-E-Scooter reden. Läuft in Bluefy (iOS) oder Chrome bzw. Edge (Android/Desktop). Der Bluetooth-Teil verlässt dein Gerät nicht, es gibt kein Konto und keinen Server.</p>
+    <p class="hint" data-t="startHintGuide">Neu hier? In der <a href="GUIDE.de.md" data-doc="GUIDE" data-t="footGuide">Anleitung</a> steht jeder Schritt.</p>
+    <p class="warn" data-t="expWarn">Machbarkeitsstudie: Diese Seite zeigt, was das Tuya-Bluetooth-Protokoll eines RCB-E-Scooters technisch möglich macht. Sie ist kein fertiges Produkt. Es gibt keine Gewährleistung. Alles was du hier tust, tust du auf eigenes Risiko. <a href="#" data-open-disclaimer>Haftungsausschluss lesen</a>.</p>
+    <p class="hint" data-t="ownDevice">Nur am eigenen Fahrzeug auf privatem Gelände. Das Verändern von Fahrparametern kann die ABE aufheben, der Betrieb auf öffentlichen Wegen ist dann nicht erlaubt.</p>
   </div>
 
   <div class="card">
-    <h2 data-t="s2Title"></h2>
+    <h2 data-t="s2Title">Verbindung</h2>
     <div class="log-opt">
-      <span data-t="showallLabel"></span>
+      <span data-t="showallLabel">Alle Geräte zeigen (wenn deins nicht auftaucht)</span>
       <input type="checkbox" id="showall">
     </div>
     <div class="btns">
       <button class="primary span2" id="btn-conn" data-act="connect"></button>
     </div>
     <p class="hint" id="devinfo"></p>
-    <p class="hint" data-t="controlsHint"></p>
+    <p class="hint" data-t="controlsHint">Nach dem Verbinden erscheinen die Karten für Live-Werte und Einstellungen. Zum Schreiben brauchst du zusätzlich den Sitzungsschlüssel und eine dpId-Zuordnung (siehe unten).</p>
     <div class="set-row">
-      <label data-t="lblLocalKey"></label>
+      <label data-t="lblLocalKey">Local Key</label>
       <input id="localkey-in" type="text" autocomplete="off" spellcheck="false" data-t-ph="localKeyPh">
     </div>
     <div class="set-row">
-      <label data-t="lblSrand"></label>
+      <label data-t="lblSrand">srand (Hex)</label>
       <input id="srand-in" type="text" autocomplete="off" spellcheck="false" data-t-ph="srandPh">
     </div>
-    <p class="hint"><span data-t="derivedPrefix"></span> <b id="derived-key">-</b></p>
-    <p class="hint" data-t="keysHint"></p>
-    <div class="card-head"><label data-t="lblLogUpload"></label><button type="button" class="help-btn" data-help="logupload" aria-label="Info">?</button></div>
+    <p class="hint"><span data-t="derivedPrefix">Abgeleiteter Sitzungsschlüssel (secretKey5):</span> <b id="derived-key">-</b></p>
+    <p class="hint" data-t="keysHint">Tuya verschlüsselt den DP-Kanal mit secretKey5 = MD5(localKey + srand). Der localKey gehört zu deinem Tuya-Konto (Cloud-seitig, nicht im Bluetooth-Verkehr), srand kommt aus der Kopplungsantwort des Rollers. Beide gibst du selbst ein, die Ableitung passiert lokal. Ohne sie kann die Seite nur mitlesen, nicht schreiben. Manche Geräte nutzen eine neuere Tuya-Sicherheitsstufe, die einen zusätzlichen secretKey braucht, den diese Seite noch nicht behandelt - Stufe-5-Geräte funktionieren damit, Stufe-15-Geräte noch nicht.</p>
+    <div class="card-head"><label data-t="lblLogUpload">Bluetooth-Mitschnitt auswerten (optional)</label><button type="button" class="help-btn" data-help="logupload" aria-label="Info">?</button></div>
     <input type="file" id="log-in" accept=".log,.gz,.zip,.txt,application/zip,application/gzip">
     <p class="hint" id="log-name"></p>
-    <p class="hint" data-t="logUploadHint"></p>
+    <p class="hint" data-t="logUploadHint">Lade einen btsnoop-Mitschnitt (.log/.gz/.zip oder Hex-Text). Die Auswertung läuft rein lokal und schickt nichts weg. Sie zeigt srand- und dpId-Kandidaten als Vorschlag an, nichts davon ist bewiesen - du prüfst und übernimmst selbst.</p>
   </div>
 
   <div class="card" id="live-card" hidden>
-    <div class="card-head"><h2 data-t="liveTitle"></h2><button type="button" class="help-btn" data-help="live" aria-label="Info">?</button></div>
-    <p class="hint" data-t="liveHint"></p>
+    <div class="card-head"><h2 data-t="liveTitle">Live-Werte</h2><button type="button" class="help-btn" data-help="live" aria-label="Info">?</button></div>
+    <p class="hint" data-t="liveHint">Keine Live-Telemetrie: Dieses Modell meldet keine Live-Fahrwerte über den DP-Kanal.</p>
   </div>
 
   <div class="card" id="batt-card" hidden>
-    <div class="card-head"><h2 data-t="battTitle"></h2><button type="button" class="help-btn" data-help="batt" aria-label="Info">?</button></div>
-    <p class="hint" data-t="battHint"></p>
+    <div class="card-head"><h2 data-t="battTitle">Akku-Werte</h2><button type="button" class="help-btn" data-help="batt" aria-label="Info">?</button></div>
+    <p class="hint" data-t="battHint">Keine Akku-Telemetrie: Dieses Modell meldet keinen Akkustand über den DP-Kanal.</p>
   </div>
 
   <div class="card" id="more-card" hidden>
-    <div class="card-head"><h2 data-t="moreTitle"></h2><button type="button" class="help-btn" data-help="more" aria-label="Info">?</button></div>
-    <p class="hint" data-t="moreHint"></p>
+    <div class="card-head"><h2 data-t="moreTitle">Einstellungen</h2><button type="button" class="help-btn" data-help="more" aria-label="Info">?</button></div>
+    <p class="hint" data-t="moreHint">Die vom App-Paket belegten Tuya-Steuer-Codes. Jede Zeile braucht ihre dpId aus dem Schema und einen gültigen Sitzungsschlüssel, sonst bleibt sie gesperrt. Ein Echo heißt nur "angenommen" - erst ein geänderter Live-Wert beweist die Wirkung.</p>
 
     <div class="set-row">
-      <label data-t="lblSchema"></label>
+      <label data-t="lblSchema">Schema JSON</label>
       <input id="schema-in" type="text" autocomplete="off" spellcheck="false" data-t-ph="schemaPh">
     </div>
     <div class="btns">
-      <button type="button" id="btn-load-schema" data-t="btnLoadSchema"></button>
-      <button type="button" id="btn-clear-schema" data-t="btnClearSchema"></button>
+      <button type="button" id="btn-load-schema" data-t="btnLoadSchema">Schema laden</button>
+      <button type="button" id="btn-clear-schema" data-t="btnClearSchema">Leeren</button>
     </div>
-    <p class="hint" data-t="schemaHint"></p>
+    <p class="hint" data-t="schemaHint">Die numerischen dpIds sind pro Produkt in der Tuya-Cloud definiert und stehen nicht im App-Paket. Ordne jedem Code seine dpId zu (Zahl, oder ein Objekt mit dpId/type/pv). Erst dann kann die passende Einstellung schreiben. Nichts wird hier erraten.</p>
 
-    <h3 class="set-group" data-t="setgrpSpeed"></h3>
-    <p class="hint" data-t="speedNote"></p>
+    <h3 class="set-group" data-t="setgrpSpeed">Tempo und Freischaltung</h3>
+    <p class="hint" data-t="speedNote">RCB legt Tempo (Boost) und Freischaltung (Auto-Entsperren) als normale Tuya-Steuer-Codes ab. Sie erscheinen in der Liste unten, sobald das Schema ihre dpId kennt.</p>
 
-    <h3 class="set-group" data-t="setgrpGeneral"></h3>
+    <h3 class="set-group" data-t="setgrpGeneral">Allgemein</h3>
     <div id="settings-rows"></div>
   </div>
 
   <div class="card" id="raw-card" hidden>
-    <div class="card-head"><h2 data-t="rawTitle"></h2><button type="button" class="help-btn" data-help="expert" aria-label="Info">?</button></div>
-    <p class="warn" data-t="expertHint"></p>
+    <div class="card-head"><h2 data-t="rawTitle">Erweiterte Einstellungen (Engine-Ebene)</h2><button type="button" class="help-btn" data-help="expert" aria-label="Info">?</button></div>
+    <p class="warn" data-t="expertHint">Ein roher DP-Schreibvorgang kann den Roller in unerwartete Zustände bringen.</p>
     <div class="set-row">
-      <label data-t="lblDpId"></label>
+      <label data-t="lblDpId">dpId (1..255)</label>
       <input id="dpid-in" type="number" min="1" max="255" data-t-ph="dpIdPh">
     </div>
     <div class="set-row">
-      <label data-t="lblDpType"></label>
+      <label data-t="lblDpType">Typ</label>
       <select id="dptype-in">
-        <option value="value" data-t="dtValue"></option>
-        <option value="enum" data-t="dtEnum"></option>
-        <option value="bool" data-t="dtBool"></option>
-        <option value="string" data-t="dtString"></option>
-        <option value="raw" data-t="dtRaw"></option>
+        <option value="value" data-t="dtValue">value (32 Bit)</option>
+        <option value="enum" data-t="dtEnum">enum</option>
+        <option value="bool" data-t="dtBool">bool</option>
+        <option value="string" data-t="dtString">string</option>
+        <option value="raw" data-t="dtRaw">raw (Hex)</option>
       </select>
     </div>
     <div class="set-row">
-      <label data-t="lblDpVal"></label>
+      <label data-t="lblDpVal">Wert</label>
       <input id="dpval-in" type="text" data-t-ph="dpValPh">
     </div>
     <div class="set-row">
-      <label data-t="lblPv"></label>
+      <label data-t="lblPv">Protokoll-Version</label>
       <select id="pv-in">
-        <option value="3" data-t="pv3"></option>
-        <option value="4" data-t="pv4"></option>
+        <option value="3" data-t="pv3">pv3 (1-Byte-Länge)</option>
+        <option value="4" data-t="pv4">pv4 (2-Byte-Länge)</option>
       </select>
     </div>
     <div class="set-row">
-      <label data-t="lblArm"></label>
-      <select id="arm-in"><option value="0" data-t="armPreview"></option><option value="1" data-t="armLive"></option></select>
+      <label data-t="lblArm">Modus</label>
+      <select id="arm-in"><option value="0" data-t="armPreview">Vorschau (nicht senden)</option><option value="1" data-t="armLive">Scharf (senden)</option></select>
     </div>
     <div class="btns">
-      <button class="primary span2" id="btn-dpsend" data-t="btnBuildSend"></button>
+      <button class="primary span2" id="btn-dpsend" data-t="btnBuildSend">Bauen und senden</button>
     </div>
-    <p class="hint" data-t="rawHint"></p>
+    <p class="hint" data-t="rawHint">Baut ein verschlüsseltes Tuya-DP-Frame aus dpId, Typ und Wert und sendet es mit dem Sitzungsschlüssel. In der Vorschau wird nur gebaut und geloggt, nicht gesendet.</p>
   </div>
 
   <div class="card">
-    <h2 data-t="s6Title"></h2>
+    <h2 data-t="s6Title">Protokoll-Log</h2>
     <div class="log-opts">
       <div class="log-opt">
-        <span data-t="publicLogLabel"></span>
+        <span data-t="publicLogLabel">Öffentliches Log (Gerätename/ID anonymisieren)</span>
         <input type="checkbox" id="public-log" checked>
         <button type="button" class="help-btn" data-help="publiclog" aria-label="Info">?</button>
       </div>
       <div class="log-opt">
-        <span data-t="diagLogLabel"></span>
+        <span data-t="diagLogLabel">Diagnose-Log</span>
         <input type="checkbox" id="diag-log">
         <button type="button" class="help-btn" data-help="diaglog" aria-label="Info">?</button>
       </div>
     </div>
     <div class="btns">
-      <button type="button" id="btn-copy-log" data-t="btnCopyLog"></button>
-      <button type="button" id="btn-clear-log" data-t="btnClearLog"></button>
-      <button type="button" id="btn-save-log" class="span2" data-t="btnSaveLog"></button>
+      <button type="button" id="btn-copy-log" data-t="btnCopyLog">Kopieren</button>
+      <button type="button" id="btn-clear-log" data-t="btnClearLog">Leeren</button>
+      <button type="button" id="btn-save-log" class="span2" data-t="btnSaveLog">Speichern</button>
     </div>
     <pre id="log"></pre>
-    <p class="hint"><span class="log-tx" data-t="logTxLegend"></span>, <span class="log-rx" data-t="logRxLegend"></span></p>
+    <p class="hint"><span class="log-tx" data-t="logTxLegend">gesendet</span>, <span class="log-rx" data-t="logRxLegend">empfangen</span></p>
   </div>
 
   <footer class="foot">
     <span class="foot-links">
-      <a id="link-guide" href="GUIDE.de.md" data-doc="GUIDE" data-t="footGuide"></a>
-      <a href="https://github.com/Laufbursche42/rcb-unlock" target="_blank" rel="noopener" data-t="footSource"></a>
-      <a id="link-readme" href="README.md" data-doc="README" data-t="footReadme"></a>
-      <a id="link-disclaimer" href="DISCLAIMER.de.md" data-doc="DISCLAIMER" data-t="footDisclaimer"></a>
-      <a id="link-license" href="LICENSE.de.md" data-doc="LICENSE" data-t="footLicense"></a>
-      <a id="link-privacy" href="PRIVACY.de.md" data-doc="PRIVACY" data-t="footPrivacy"></a>
-      <a id="link-trademarks" href="TRADEMARKS.de.md" data-doc="TRADEMARKS" data-t="footTrademarks"></a>
+      <a id="link-guide" href="GUIDE.de.md" data-doc="GUIDE" data-t="footGuide">Anleitung</a>
+      <a href="https://github.com/Laufbursche42/rcb-unlock" target="_blank" rel="noopener" data-t="footSource">Quellcode</a>
+      <a id="link-readme" href="README.md" data-doc="README" data-t="footReadme">Readme</a>
+      <a id="link-disclaimer" href="DISCLAIMER.de.md" data-doc="DISCLAIMER" data-t="footDisclaimer">Haftungsausschluss</a>
+      <a id="link-license" href="LICENSE.de.md" data-doc="LICENSE" data-t="footLicense">Lizenz</a>
+      <a id="link-privacy" href="PRIVACY.de.md" data-doc="PRIVACY" data-t="footPrivacy">Datenschutz</a>
+      <a id="link-trademarks" href="TRADEMARKS.de.md" data-doc="TRADEMARKS" data-t="footTrademarks">Marken</a>
     </span>
-    <span class="foot-links"><span class="ver" id="build-ver"></span><a href="https://github.com/Laufbursche42/Laufbursche42/issues" target="_blank" rel="noopener" data-t="footIssue"></a></span>
+    <span class="foot-links"><span class="ver" id="build-ver"></span><a href="https://github.com/Laufbursche42/Laufbursche42/issues" target="_blank" rel="noopener" data-t="footIssue">Fehler melden</a></span>
     <a class="foot-copy" href="https://laufbursche42.github.io/Laufbursche42/" target="_blank" rel="noopener">Copyright (c) 2026 Laufbursche</a>
   </footer>
 </div>
@@ -178,7 +178,7 @@
   </div>
   <div class="doc-body" id="doc-body"></div>
   <div class="doc-foot">
-    <button type="button" id="doc-close" data-t="docClose"></button>
+    <button type="button" id="doc-close" data-t="docClose">Schließen</button>
   </div>
 </dialog>
 
@@ -189,24 +189,24 @@
   </div>
   <div class="doc-body"><p id="help-body"></p></div>
   <div class="doc-foot">
-    <button type="button" id="help-close" data-t="docClose"></button>
+    <button type="button" id="help-close" data-t="docClose">Schließen</button>
   </div>
 </dialog>
 
 <dialog id="confirm" aria-labelledby="confirm-title">
   <div class="doc-head">
-    <h3 id="confirm-title" data-t="confirmTitle"></h3>
+    <h3 id="confirm-title" data-t="confirmTitle">Bist du sicher?</h3>
     <button type="button" id="confirm-x">&times;</button>
   </div>
   <div class="doc-body"><p id="confirm-body"></p></div>
   <div class="doc-foot">
-    <button type="button" id="confirm-no" data-t="confirmCancel"></button>
-    <button type="button" id="confirm-ok" class="primary" data-t="confirmOk"></button>
+    <button type="button" id="confirm-no" data-t="confirmCancel">Abbrechen</button>
+    <button type="button" id="confirm-ok" class="primary" data-t="confirmOk">Trotzdem senden</button>
   </div>
 </dialog>
 
-<script src="report-footer.js?v=10"></script>
-<script src="i18n.js?v=10"></script>
-<script src="app.js?v=10"></script>
+<script src="report-footer.js?v=11"></script>
+<script src="i18n.js?v=11"></script>
+<script src="app.js?v=11"></script>
 </body>
 </html>
